@@ -10,9 +10,6 @@ public class CameraController : MonoBehaviour {
 	public float zoomBuffer = 5; //Extra "zoom" to add
 
 	//Private variables
-		//Original camera variables
-	Vector3 originalPos;
-	float originalZoom;
 		//Camera shake
 	Vector3 preShakePos;
 	float shakeDecay;
@@ -25,10 +22,6 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Get our original info
-		originalPos = transform.position;
-		originalZoom = Camera.main.orthographicSize;
-
 		target = new Vector3(0, 0, -10);
 		velocity = Vector3.zero;
 	}
