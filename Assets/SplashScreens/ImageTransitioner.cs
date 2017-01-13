@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 
 [RequireComponent (typeof (Image))]
 
 public class ImageTransitioner : MonoBehaviour {
 
-	public Sprite[] images; //Array of images we're transitioning through
-	public float stayTime; //How long should each image stay for?
-	public float transitionTime; //How long should the transitions between each image take?
+	public Sprite[] Images; //Array of Images we're transitioning through
+	public float StayTime; //How long should each image stay for?
+	public float TransitionTime; //How long should the transitions between each image take?
+	public UnityEvent DoesAfter; //Events to do after the Slideshow is over
 
 	Image image; //Compoenent reference
 	
@@ -34,7 +36,7 @@ public class ImageTransitioner : MonoBehaviour {
 	public void StartSlideshow(){
 		index = 0; //Reset index
 		alpha = 0; //Reset alpha
-		image.sprite = images[0]; //Set image to first image
+		image.sprite = Images[0]; //Set image to first image
 		initTime = Time.time; //Set initial time
 		state = States.Starting; //We're starting now
 	}
@@ -55,7 +57,7 @@ public class ImageTransitioner : MonoBehaviour {
 			break;
 			
 			case States.FadingIn:
-				alpha = (Time.time - initTime) / (transitionTime); // alpha = [0, 1]
+				alpha = (Time.time - initTime) / (TransitionTime); // alpha = [0, 1]
 				if(alpha >= 1){ //If alpha >= 1, we're done transitioning
 					initTime = Time.time; //Set initial time
 					alpha = 1; //Set to fully opaque
@@ -66,24 +68,25 @@ public class ImageTransitioner : MonoBehaviour {
 
 			case States.Staying:
 				float t = (Time.time - initTime); //Time from when we started staying and now
-				if(t >= stayTime){ //If we're stayed for long enough
+				if(t >= StayTime){ //If we're stayed for long enough
 					initTime = Time.time; //Set initial time
 					state = States.FadingOut; //Start fading out
 				}
 			break;
 
 			case States.FadingOut:
-				alpha = (Time.time - initTime) / (transitionTime); // alpha = [0, 1]
+				alpha = (Time.time - initTime) / (TransitionTime); // alpha = [0, 1]
 				alpha = 1 - alpha;
 				
 				if(alpha <= 0){ //If alpha <= 0, we're done transitioning
 					index ++; //Increment index
-					if(index >= images.Length){ //If we've run out of images,
+					if(index >= Images.Length){ //If we've run out of Images,
+						DoesAfter.Invoke(); //Invoke/do what we're supposed to do after we're done the slideshow
 						StopSlideshow(); //Stop the slideshow
-					} else { //Otherwise, we still have images to show
+					} else { //Otherwise, we still have Images to show
 						initTime = Time.time; //Set initial time
 						alpha = 0; //Set to fully opaque
-						image.sprite = images[index]; //Set the next image
+						image.sprite = Images[index]; //Set the next image
 						state = States.FadingIn; //Start fading in next image
 					}
 				}
