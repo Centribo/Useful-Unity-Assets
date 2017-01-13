@@ -4,7 +4,7 @@ using System.Collections;
 public class MouseRotate : MonoBehaviour {
 
 	float arcBallRadius = 0.9f;
-	Vector2 arcBallCenter;
+	//Vector2 arcBallCenter;
 	bool isDragging = false;
 
 	Quaternion beforeQuaternion = Quaternion.identity;
@@ -14,7 +14,7 @@ public class MouseRotate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		arcBallCenter = new Vector2(Screen.width/2.0f, Screen.height/2.0f);
+		//arcBallCenter = new Vector2(Screen.width/2.0f, Screen.height/2.0f);
 	}
 
 	// Update is called once per frame
