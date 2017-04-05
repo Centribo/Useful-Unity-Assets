@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour {
 		transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothing);
 		AdjustZoom();
 	}
-
+	
 	public void AddTarget(GameObject target){
 		targets.Add(target);
 	}
