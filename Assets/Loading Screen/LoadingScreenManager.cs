@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CanvasGroup))]
-public class LoadingScreenScript : MonoBehaviour {
+public class LoadingScreenManager : Singleton<LoadingScreenManager> {
 
 	const float ASYNC_LOAD_COMPLETION_PROGRESS = 0.9f;
 
@@ -32,12 +32,10 @@ public class LoadingScreenScript : MonoBehaviour {
 		//We don't block raycasts, and we can't be interacted with
 		canvasGroup.blocksRaycasts = false;
 		canvasGroup.interactable = false;
-
-		LoadLevel("AfterScene");
 	}
 
 	//Public call
-	public void LoadLevel(string sceneName) {
+	public void LoadScene(string sceneName) {
 		StartCoroutine(LoadSceneAsync(sceneName));
 	}
 
