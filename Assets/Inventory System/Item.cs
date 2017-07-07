@@ -47,7 +47,7 @@ public class Item {
 		return s;
 	}
 
-	// Compare methods for finding
+	// Compare methods for finding (note, item equality is always checked via item name)
 	public bool CompareByName(Item x) {
 		return this.name == x.name;
 	}
