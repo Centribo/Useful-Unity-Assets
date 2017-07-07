@@ -11,8 +11,8 @@ public class Item {
 		Epic = 3
 	};
 
-	public string name;
 	public int updatedOrder;
+	public string name;
 	public int value;
 	public int weight;
 	public int rarity;
@@ -28,11 +28,21 @@ public class Item {
 		this.stackSize = stackSize;
 	}
 
+	// Copy constructor
+	public Item(Item otherItem) {
+		this.name = otherItem.name;
+		this.value = otherItem.value;
+		this.weight = otherItem.weight;
+		this.rarity = otherItem.rarity;
+		this.isStackable = otherItem.isStackable;
+		this.stackSize = otherItem.stackSize;
+	}
+
 	public override string ToString() {
 		string s = "";
 		s += name + " x" + stackSize + ": ";
 		s += ((Rarities)rarity).ToString() + ", ";
-		s += "v=" + value + " ";
+		s += "v=" + value + "(" + (value*stackSize) + ") ";
 		s += "w=" + weight + "(" + (weight*stackSize) + ") ";
 		return s;
 	}
@@ -43,6 +53,29 @@ public class Item {
 	}
 	public bool CompareByName(string name) {
 		return this.name == name;
+	}
+	public override bool Equals(object other) {
+		return other is Item && this == (Item)other;
+	}
+	public bool Equals(Item other) {
+		return this.name == other.name;
+	}
+	public static bool operator ==(Item x, Item y) {
+		if (System.Object.ReferenceEquals(x, null) && System.Object.ReferenceEquals(y, null)) {
+			return true; // Both are null
+		} else if (System.Object.ReferenceEquals(x, null)) {
+			return false; // y is not null
+		} else if (System.Object.ReferenceEquals(y, null)) {
+			return false; // x is not null
+		} else {
+			return x.name == y.name;
+		}
+	}
+	public static bool operator !=(Item x, Item y) {
+		return !(x == y);
+	}
+	public override int GetHashCode() {
+		return this.name.GetHashCode();
 	}
 
 	// Compare methods for sorting

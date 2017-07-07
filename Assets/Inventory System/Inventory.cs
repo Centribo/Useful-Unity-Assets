@@ -17,9 +17,9 @@ public class Inventory {
 	}
 
 	public bool AddItem(Item i) { // True if added to inventory, false if not
+		i = new Item(i);
 		if (i.isStackable) { // If item can be stacked,
-							 // Check if we can add the stack by weight
-			if (currentWeight + (i.weight * i.stackSize) > maxWeight) {
+			if (currentWeight + (i.weight * i.stackSize) > maxWeight) { // Check if we can add the stack by weight
 				return false;
 			} else {
 				Item j = FindItem(i); // Look for the item,
@@ -37,7 +37,7 @@ public class Inventory {
 					return true;
 				}
 			}
-		} else { //Otherwise, item is not stackable
+		} else { // Otherwise, item is not stackable
 			if (currentWeight + i.weight > maxWeight) {
 				return false;
 			} else {
@@ -50,6 +50,47 @@ public class Inventory {
 		}
 	}
 
+	// Returns item, removed from inventory or null
+	public Item RemoveItems(Item i, int ammount) {
+		Item itemInInventory = FindItem(i);
+		if(itemInInventory == null) { // Not found
+			return null;
+		} else { // Item found
+			if(ammount > itemInInventory.stackSize) { // Requesting to remove more than available
+				return null;
+			} else if(ammount == itemInInventory.stackSize) { // Requesting to remove all available
+				items.Remove(i);
+				currentWeight -= ammount * itemInInventory.weight;
+				return itemInInventory;
+			} else { // Request to remove less than available
+				itemInInventory.stackSize -= ammount;
+				currentWeight -= ammount * itemInInventory.weight;
+				Item removedItem = new Item(itemInInventory); // Copy constructor
+				removedItem.stackSize = ammount;
+				return removedItem;
+			}
+		}
+	}
+
+	// Call to just remove 1 of an item, if it is stackable, it will return the WHOLE stack
+	public Item RemoveItem(Item i) {
+		Item itemInInventory = FindItem(i);
+		if (itemInInventory == null) { // Not found
+			return null;
+		} else { // Found
+			if (itemInInventory.isStackable) {
+				items.Remove(i);
+				currentWeight -= itemInInventory.stackSize * itemInInventory.weight;
+				return new Item(itemInInventory); // Copy constructor
+			} else {
+				items.Remove(i);
+				currentWeight -= itemInInventory.weight;
+				return new Item(itemInInventory);
+			}
+		}
+	}
+
+	// Searches for item by name, returns item if found or null if not
 	public Item FindItem(Item i) {
 		return items.Find(i.CompareByName);
 	}
