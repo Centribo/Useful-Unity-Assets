@@ -47,7 +47,7 @@ public class FirstPersonController : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		if(Input.GetAxis("Vertical") != 0) {
-			BodyRigidbody.AddForce(transform.forward * 100);
+			BodyRigidbody.AddForce(transform.forward * 10);
 		}
 
 		if (Input.GetButtonDown(JUMP_BUTTON) && IsOnGround()) {
