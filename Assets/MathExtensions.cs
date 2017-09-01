@@ -13,4 +13,14 @@ public class MathExtensions : MonoBehaviour {
 
 		return new Vector2(cos * tx - sin * ty, sin * tx + cos * ty);
 	}
+	
+	public static float LinearMap(float value, float inputMin, float inputMax, float outputMin, float outputMax){
+		float output = Mathf.Clamp(value, inputMin, inputMax);
+		
+		float inputRange = inputMax - inputMin;
+		float outputRange = outputMax - outputMin;
+
+		output = ((output - inputMin) * (outputRange / inputRange)) + outputMin;
+		return output;
+	}
 }
