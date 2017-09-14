@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MathExtensions : MonoBehaviour {
+public class MathHelper : MonoBehaviour {
 	public static Vector2 Rotate(Vector2 v, float degrees) {
 		float radians = degrees * Mathf.Deg2Rad;
 		float sin = Mathf.Sin(radians);
