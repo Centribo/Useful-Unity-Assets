@@ -27,6 +27,7 @@ public class FirstPersonController : MonoBehaviour {
 	[Header("Movement")]
 	public float MoveSpeed;
 	public float MaxVelocityChange;
+	public float JumpForce;
 
 	//PRIVATE
 	private const string HORIZONTAL_INPUT_AXIS = "Mouse X";
@@ -73,7 +74,7 @@ public class FirstPersonController : MonoBehaviour {
 			BodyRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 
 			if (Input.GetButtonDown(JUMP_BUTTON)) {
-				BodyRigidbody.AddForce(Vector3.up * 200);
+				BodyRigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 			}
 		}
 	}
