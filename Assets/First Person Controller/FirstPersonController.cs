@@ -6,9 +6,12 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour {
 
 	//PUBLIC
+	[Header("References")]
 	public Transform BodyTransform;
 	public CapsuleCollider BodyCollider;
 	public Rigidbody BodyRigidbody;
+	
+	[Header("Look")]
 	[Range(0, 90)]
 	public float MaxVerticalAngle = 90;
 	[Range(-90, 0)]
@@ -20,6 +23,10 @@ public class FirstPersonController : MonoBehaviour {
 	public float HorizontalLookSensitivity = 1;
 	[Range(0, 5)]
 	public float VerticalLookSensitivity = 1;
+
+	[Header("Movement")]
+	public float MoveSpeed;
+	public float MaxVelocityChange;
 
 	//PRIVATE
 	private const string HORIZONTAL_INPUT_AXIS = "Mouse X";
@@ -45,18 +52,30 @@ public class FirstPersonController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update() {
-		if(Input.GetAxis("Vertical") != 0) {
-			BodyRigidbody.AddForce(transform.forward * 10);
-		}
-
-		if (Input.GetButtonDown(JUMP_BUTTON) && IsOnGround()) {
-			BodyRigidbody.AddForce(Vector3.up * 200);
-		}
-
-		
+	void Update() {	
 		LookUpdate();
 		CursorLockUpdate();
+	}
+
+	void FixedUpdate(){
+		if(IsOnGround()){
+			RaycastHit groundHit = GetGroundHit();
+			
+			Vector3 targetVelocity = new Vector3(Input.GetAxis(STRAFE_INPUT_AXIS), 0, Input.GetAxis(FORWARD_INPUT_AXIS));
+			targetVelocity = transform.TransformDirection(targetVelocity);
+			targetVelocity *= MoveSpeed;
+
+			Vector3 velocity = BodyRigidbody.velocity;
+			Vector3 velocityChange = targetVelocity - velocity;
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -MaxVelocityChange, MaxVelocityChange);
+			velocityChange.y = 0;
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -MaxVelocityChange, MaxVelocityChange);
+			BodyRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+
+			if (Input.GetButtonDown(JUMP_BUTTON)) {
+				BodyRigidbody.AddForce(Vector3.up * 200);
+			}
+		}
 	}
 
 	bool IsOnGround() {
@@ -68,6 +87,14 @@ public class FirstPersonController : MonoBehaviour {
 		Debug.DrawLine(start, end, Color.red);
 		
 		return didHit;
+	}
+
+	RaycastHit GetGroundHit(){
+		RaycastHit hit;
+		Vector3 start = BodyTransform.position + (Vector3.down * BodyCollider.height / 2) - (Vector3.down * 0.1f);
+		Vector3 end = start + (Vector3.down * 0.2f);
+		Physics.Linecast(start, end, out hit);
+		return hit;
 	}
 
 	// Adapted from MouseLook.cs in Standard Assets
