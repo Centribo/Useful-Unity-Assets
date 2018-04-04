@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _DissolveTexture:
-        m_Texture: {fileID: 2800000, guid: 08cb75c4421756345998662fb693cc73, type: 3}
+        m_Texture: {fileID: 2800000, guid: 17ea69d378344b5408d7bb9ad3d6a13d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -27,7 +27,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DissolveCutoff: 0.24
+    - _DissolveCutoff: 0.25
     - _Glossiness: 0.5
     - _Metallic: 0
     m_Colors:

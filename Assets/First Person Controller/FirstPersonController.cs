@@ -25,17 +25,24 @@ public class FirstPersonController : MonoBehaviour {
 	public float VerticalLookSensitivity = 1;
 
 	[Header("Movement")]
-	public float MoveSpeed;
-	public float MaxVelocityChange;
-	public float JumpForce;
+	public float MoveSpeed = 5;
+	public float MaxVelocityChange = 10;
+	public float JumpForce = 5;
+	public float InteractDistace = 3;
+	
+	[Header("Input")]
+	public string HORIZONTAL_INPUT_AXIS = "Mouse X";
+	public string VERTICAL_INPUT_AXIS   = "Mouse Y";
+	public string FORWARD_INPUT_AXIS    = "Vertical";
+	public string STRAFE_INPUT_AXIS     = "Horizontal";
+	public string JUMP_BUTTON           = "Jump";
+	public string PRIMARY_BUTTON        = "Fire1";
+	public string INTERACT_BUTTON       = "Fire2";
+	
+	[Header("Debugging")]
+	public bool DrawDebugGizmos;
 
 	//PRIVATE
-	private const string HORIZONTAL_INPUT_AXIS = "Mouse X";
-	private const string VERTICAL_INPUT_AXIS = "Mouse Y";
-	private const string FORWARD_INPUT_AXIS = "Vertical";
-	private const string STRAFE_INPUT_AXIS = "Horizontal";
-	private const string JUMP_BUTTON = "Jump";
-
 	private bool cursorIsLocked = true;
 	private Camera playerCamera;
 	private Quaternion targetCameraRotation;
@@ -53,15 +60,21 @@ public class FirstPersonController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update() {	
+	void Update() {
+		if(DrawDebugGizmos){
+			Debug.DrawRay(transform.position, transform.forward * InteractDistace, Color.green);
+			Vector3 start = BodyTransform.position + (Vector3.down * BodyCollider.height / 2) - (Vector3.down * 0.1f);
+			Vector3 end = start + (Vector3.down * 0.2f);
+			Debug.DrawLine(start, end, Color.red);
+		}
+
 		LookUpdate();
+		InteractUpdate();
 		CursorLockUpdate();
 	}
 
 	void FixedUpdate(){
 		if(IsOnGround()){
-			RaycastHit groundHit = GetGroundHit();
-			
 			Vector3 targetVelocity = new Vector3(Input.GetAxis(STRAFE_INPUT_AXIS), 0, Input.GetAxis(FORWARD_INPUT_AXIS));
 			targetVelocity = transform.TransformDirection(targetVelocity);
 			targetVelocity *= MoveSpeed;
@@ -79,23 +92,24 @@ public class FirstPersonController : MonoBehaviour {
 		}
 	}
 
+	void InteractUpdate(){
+		if(Input.GetButtonDown(INTERACT_BUTTON)){
+			RaycastHit hit;
+			if(Physics.Raycast(transform.position, transform.forward, out hit)){
+				if(hit.distance <= InteractDistace){
+					Debug.Log(hit.transform.name);
+				}
+			}
+		}
+	}
+
 	bool IsOnGround() {
 		RaycastHit hit;
 		Vector3 start = BodyTransform.position + (Vector3.down * BodyCollider.height / 2) - (Vector3.down * 0.1f);
 		Vector3 end = start + (Vector3.down * 0.2f);
 		bool didHit = Physics.Linecast(start, end, out hit);
-
-		Debug.DrawLine(start, end, Color.red);
 		
 		return didHit;
-	}
-
-	RaycastHit GetGroundHit(){
-		RaycastHit hit;
-		Vector3 start = BodyTransform.position + (Vector3.down * BodyCollider.height / 2) - (Vector3.down * 0.1f);
-		Vector3 end = start + (Vector3.down * 0.2f);
-		Physics.Linecast(start, end, out hit);
-		return hit;
 	}
 
 	// Adapted from MouseLook.cs in Standard Assets
