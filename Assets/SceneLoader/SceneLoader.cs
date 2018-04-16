@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader {
+public class SceneLoader : MonoBehaviour {
 	
 	// https://docs.unity3d.com/ScriptReference/AsyncOperation-progress.html
 	const float ASYNC_LOAD_COMPLETION_PROGRESS = 0.9f;
