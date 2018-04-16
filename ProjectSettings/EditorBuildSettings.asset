@@ -14,3 +14,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Loading Screen/LoadingScene.unity
     guid: 542137b0d47810f4d8672d924e160fad
+  - enabled: 1
+    path: Assets/Basic Networking/Client.unity
+    guid: 8828e936661a9814fb8d0987eee1533c
+  - enabled: 1
+    path: Assets/AnimationCurve/Example.unity
+    guid: 1f497aa5151f9594b855536e236c4cdd
+  - enabled: 1
+    path: Assets/CameraController/Example_Scene.unity
+    guid: 2374111ef8340f140b52490cda310a57
+  - enabled: 1
+    path: Assets/First Person Controller/FirstPersonController.unity
+    guid: a6978f2b9f8f20b46b00d82eca6e8153
+  - enabled: 1
+    path: Assets/Inventory System/InventorySystemExample.unity
+    guid: 6fecb2437481b33479daf867d8aac037
+  - enabled: 1
+    path: Assets/3D Sprites/Scenes/Main.unity
+    guid: 1db96f4438289c24d910c99d0941b741
+  - enabled: 1
+    path: Assets/Basic Networking/Server.unity
+    guid: ae3676fb77f490c48b7f338a6d878bb0
+  - enabled: 1
+    path: Assets/SplashScreens/SplashScreens.unity
+    guid: e09b81776cfec074ea08875e366ef0a6

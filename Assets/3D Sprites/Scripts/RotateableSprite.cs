@@ -57,7 +57,7 @@ public class RotateableSprite : MonoBehaviour {
 		} else if(viewingAngle <= -112.5f && viewingAngle > -157.5f){
 			SetSprite(BackRightSprite);
 		} else {
-			Debug.LogWarning("Angle not valid: " + viewingAngle);
+			//Debug.LogWarning("Angle not valid: " + viewingAngle);
 		}
 
 		if(ShowDebugInfo){
@@ -69,28 +69,28 @@ public class RotateableSprite : MonoBehaviour {
 			//  -90 = Right
 			// -135 = Back right
 			// -180 = Back
-			Debug.Log(viewingAngle);
+			//Debug.Log(viewingAngle);
 
 			//Draw facing line
 			Vector3 delta = new Vector3(Mathf.Cos(FacingAngle * Mathf.Deg2Rad), 0, Mathf.Sin(FacingAngle * Mathf.Deg2Rad));
 			Debug.DrawLine(transform.position, transform.position + delta, Color.red);
 
 			if((viewingAngle > 157.5f && viewingAngle <= 180) || (viewingAngle >= -180 && viewingAngle < -157.5f)){
-				Debug.Log("Back");
+				//Debug.Log("Back");
 			} else if(viewingAngle <= 22.5f && viewingAngle > -22.5f){
-				Debug.Log("Front");
+				//Debug.Log("Front");
 			} else if(viewingAngle <= 67.5f && viewingAngle > 22.5f){
-				Debug.Log("FrontLeft");
+				//Debug.Log("FrontLeft");
 			} else if(viewingAngle <= 112.5f && viewingAngle > 67.5f){
-				Debug.Log("Left");
+				//Debug.Log("Left");
 			} else if(viewingAngle <= 157.5f && viewingAngle > 112.5f){
-				Debug.Log("BackLeft");
+				//Debug.Log("BackLeft");
 			} else if(viewingAngle <= -22.5f && viewingAngle > -67.5f){
-				Debug.Log("FrontRight");
+				//Debug.Log("FrontRight");
 			} else if(viewingAngle <= -67.5f && viewingAngle > -112.5f){
-				Debug.Log("Right");
+				//Debug.Log("Right");
 			} else if(viewingAngle <= -112.5f && viewingAngle > -157.5f){
-				Debug.Log("BackRight");
+				//Debug.Log("BackRight");
 			}
 		}
 	}
