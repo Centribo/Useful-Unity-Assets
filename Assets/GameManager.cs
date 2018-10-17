@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 [AddComponentMenu("Managers/GameManager")]
 
-public class GameManager : MonoBehaviour {
+public class GameManager : Singleton<GameManager> {
 
-	public static GameManager instance = null;
-	public static GameManager Instance { //Singleton pattern instance
-		get { //Getter
-			if(instance == null){ //If its null,
-				instance = (GameManager)FindObjectOfType(typeof(GameManager)); //Find it
-			}
-			return instance; //Return it
-		}
-	}
+	// public static GameManager instance = null;
+	// public static GameManager Instance { //Singleton pattern instance
+	// 	get { //Getter
+	// 		if(instance == null){ //If its null,
+	// 			instance = (GameManager)FindObjectOfType(typeof(GameManager)); //Find it
+	// 		}
+	// 		return instance; //Return it
+	// 	}
+	// }
 
 	public enum State { Null };
 	public State state;
