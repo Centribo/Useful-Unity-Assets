@@ -25,12 +25,10 @@ public static class ListExtentions {
 	/// Gets a random item from the list using a uniform distribution
 	/// This method uses UnityEngine.Random for randomization
 	/// </summary>
-	/// <example>
-	/// <code>
+	/// <example><code>
 	/// List<int> elements = new List<int> { 1, 2, 3, 4, 5 };
 	/// int randomElement = elements.RandomItem();
-	/// </code>
-	/// </example>
+	/// </code></example>
 	/// <param name="list">The list to get a random element from</param>
 	/// <returns>The random element</returns>
 	public static T RandomItem<T>(this IList<T> list) {

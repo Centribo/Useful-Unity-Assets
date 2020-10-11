@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MathExtensions {
-
+public static class MathExtensions {
 	/// <summary>
 	/// Maps a given value in an input range to a output value in a given output range. The value will be clamped.
 	/// </summary>
