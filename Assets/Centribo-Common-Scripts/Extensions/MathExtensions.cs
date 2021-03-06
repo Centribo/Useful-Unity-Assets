@@ -21,4 +21,11 @@ public static class MathExtensions {
 		output = ((output - inputMin) * (outputRange / inputRange)) + outputMin;
 		return output;
 	}
+
+	/// <summary>
+	/// Returns the modulo of x when dividing by y
+	/// </summary>
+	public static int Mod(int x, int y) {
+		return (x % y + y) % y;
+	}
 }
