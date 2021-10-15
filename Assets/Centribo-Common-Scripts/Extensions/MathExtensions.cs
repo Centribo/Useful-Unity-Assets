@@ -59,7 +59,7 @@ public static class MathExtensions {
 		{-1, CompassDirection.Southeast}
 	};
 
-	public static CompassDirection DirectionVectorToCompassDirection(Vector2 input) {
+	public static CompassDirection StickInputToCompassDirection(Vector2 input) {
 		input = input.normalized;
 		float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 		float sectorSize = 360.0f / 8.0f;
@@ -82,7 +82,7 @@ public static class MathExtensions {
 		{-1, CardinalCompassDirection.South}
 	};
 
-	public static CardinalCompassDirection DirectionVectorToCardinalCompassDirection(Vector2 input) {
+	public static CardinalCompassDirection StickInputToCardinalCompassDirection(Vector2 input) {
 		input = input.normalized;
 		float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 		float sectorSize = 360.0f / 4.0f;
