@@ -1,112 +1,109 @@
 using System;
 using UnityEngine;
 
-public class ShowWhenExample : MonoBehaviour
-{
-    #region Bool Region
+namespace Centribo.Common {
+	public class ShowWhenExample : MonoBehaviour {
+		#region Bool Region
 
-    [Header("Check with BOOL")]
-    public bool show;
-    
-    [ShowWhen("show")]
-    public float numberWhenTrue;
+		[Header("Check with BOOL")]
+		public bool show;
 
-    [ShowWhen("show", false)]
-    public Vector3 vector3WhenFalse;
+		[ShowWhen("show")]
+		public float numberWhenTrue;
 
-    [ShowWhen("show")]
-    public float[] arrayWhenTrue = {1, 2, 3};
+		[ShowWhen("show", false)]
+		public Vector3 vector3WhenFalse;
 
-    [Serializable]
-    public class ArrayClass
-    {
-        public Color[] colorArray = {Color.red, Color.blue, Color.green};
-    }
+		[ShowWhen("show")]
+		public float[] arrayWhenTrue = { 1, 2, 3 };
 
-    [ShowWhen("show")]
-    public ArrayClass workaroundForArrayWhenTrue;
+		[Serializable]
+		public class ArrayClass {
+			public Color[] colorArray = { Color.red, Color.blue, Color.green };
+		}
 
-    [Serializable]
-    public class CustomClass
-    {
-        public float floatValue = 99;
-        public string stringValue = "string";
-    }
+		[ShowWhen("show")]
+		public ArrayClass workaroundForArrayWhenTrue;
 
-    [ShowWhen("show", true)]
-    public CustomClass customClass;
-  
-    [ShowWhen("show", "error")]
-    public string stringErrorComparationValueType;
+		[Serializable]
+		public class CustomClass {
+			public float floatValue = 99;
+			public string stringValue = "string";
+		}
 
-    #endregion
+		[ShowWhen("show", true)]
+		public CustomClass customClass;
 
-    #region Enum Region
+		[ShowWhen("show", "error")]
+		public string stringErrorComparationValueType;
 
-    public enum EaseType
-    {
-        Linear,
-        OutQuad,
-        InOutQuint
-    }
-    
-    public enum OtherEnum
-    {
-        Enum1
-    }
-    
-    [Space(20), Header("Check with ENUM")]
-    public EaseType easeType;
-    
-    [ShowWhen("easeType", EaseType.Linear)]
-    public string stringWhenLinear = "Linear";
-    
-    [ShowWhen("easeType", new object[]{EaseType.Linear, EaseType.OutQuad})]
-    public string stringWhenLinearAndOutQuad = "LinearAndOutQuad";
-    
-    [ShowWhen("easeType", EaseType.InOutQuint)]
-    public string stringWhenInOutQuint = "InOutQuint";
-    
-    [ShowWhen("easeType")]
-    public string stringErrorNeedParam;
-    
-    [ShowWhen("easeType",5)]
-    public string stringErrorNotEnum;
+		#endregion
 
-    public OtherEnum otherEnum;
-    
-    [ShowWhen("otherEnum", new object[]{OtherEnum.Enum1, EaseType.Linear})]
-    public string stringErrorWrongEnumType;
+		#region Enum Region
 
-    #endregion
+		public enum EaseType {
+			Linear,
+			OutQuad,
+			InOutQuint
+		}
 
-    #region Int Region
+		public enum OtherEnum {
+			Enum1
+		}
 
-    [Space(20), Header("Check with INT")]
-    public int intValue;
-    
-    [ShowWhen("intValue", ">5")]
-    public string stringWhenGreaterThan5 = "Greater Than 5";
-    
-    [ShowWhen("intValue", ">3+5")]
-    public string stringErrorNotKnownOperation;
+		[Space(20), Header("Check with ENUM")]
+		public EaseType easeType;
 
-    #endregion
+		[ShowWhen("easeType", EaseType.Linear)]
+		public string stringWhenLinear = "Linear";
 
-    #region Float Region
+		[ShowWhen("easeType", new object[] { EaseType.Linear, EaseType.OutQuad })]
+		public string stringWhenLinearAndOutQuad = "LinearAndOutQuad";
 
-    [Space(20), Header("Check with FLOAT")]
-    public float floatValue;
+		[ShowWhen("easeType", EaseType.InOutQuint)]
+		public string stringWhenInOutQuint = "InOutQuint";
 
-    [ShowWhen("floatValue", "!=2")]
-    public GameObject showWhenOtherThan2;
-    
-    [ShowWhen("floatValueError", ">5")]
-    public string stringErrorParameterNotKnown;
-    
-    [ShowWhen("stringErrorParameterNotKnown", ">+5")]
-    public string stringErrorTypeNotSupported;
+		[ShowWhen("easeType")]
+		public string stringErrorNeedParam;
 
-    #endregion
+		[ShowWhen("easeType", 5)]
+		public string stringErrorNotEnum;
 
+		public OtherEnum otherEnum;
+
+		[ShowWhen("otherEnum", new object[] { OtherEnum.Enum1, EaseType.Linear })]
+		public string stringErrorWrongEnumType;
+
+		#endregion
+
+		#region Int Region
+
+		[Space(20), Header("Check with INT")]
+		public int intValue;
+
+		[ShowWhen("intValue", ">5")]
+		public string stringWhenGreaterThan5 = "Greater Than 5";
+
+		[ShowWhen("intValue", ">3+5")]
+		public string stringErrorNotKnownOperation;
+
+		#endregion
+
+		#region Float Region
+
+		[Space(20), Header("Check with FLOAT")]
+		public float floatValue;
+
+		[ShowWhen("floatValue", "!=2")]
+		public GameObject showWhenOtherThan2;
+
+		[ShowWhen("floatValueError", ">5")]
+		public string stringErrorParameterNotKnown;
+
+		[ShowWhen("stringErrorParameterNotKnown", ">+5")]
+		public string stringErrorTypeNotSupported;
+
+		#endregion
+
+	}
 }
