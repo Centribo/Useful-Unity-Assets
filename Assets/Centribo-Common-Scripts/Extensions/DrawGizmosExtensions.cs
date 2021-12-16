@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 namespace Centribo.Common {
 	public static class DrawGizmosExtensions {
 
@@ -35,3 +37,5 @@ namespace Centribo.Common {
 		}
 	}
 }
+
+#endif
