@@ -32,8 +32,22 @@ namespace Centribo.Common {
 		/// </code></example>
 		/// <param name="list">The list to get a random element from</param>
 		/// <returns>The random element</returns>
-		public static T RandomItem<T>(this IList<T> list) {
+		public static T RandomElement<T>(this IList<T> list) {
 			return list[UnityEngine.Random.Range(0, list.Count)];
+		}
+
+		/// <summary>
+		/// Tries to access an element at a given index from a list. Returns null if unable to access.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		public static T TryGetElement<T>(this List<T> list, int index) where T : class {
+			if (list == null) return null;
+
+			if (index < list.Count) {
+				return list[index];
+			}
+
+			return null;
 		}
 	}
 }

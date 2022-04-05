@@ -25,12 +25,12 @@ namespace Centribo.Common {
 		/// <summary>
 		/// Maps a given value in an input range to a output value in a given output range. The value will be clamped.
 		/// </summary>
-		/// <param name="value">The value in the input range [<see cref="inputMin"/>, <see cref"inputMax"/>]. This value will be clamped into the range.</param>
+		/// <param name="value">The value in the input range [<paramref name="inputMin"/>, <paramref name="inputMax"/>]. This value will be clamped into the range.</param>
 		/// <param name="inputMin">The minimum value of the input range</param>
 		/// <param name="inputMax">The maximum value of the input range</param>
 		/// <param name="outputMin">The minimum value of the output range</param>
 		/// <param name="outputMax">the maximum value of the output range</param>
-		/// <returns>The linearly mapped value in the range [<see cref="outputMin"/>, <see cref="outputMax"/>]</returns>
+		/// <returns>The linearly mapped value in the range [<paramref name="outputMin"/>, <paramref name="outputMax"/>]</returns>
 		public static float LinearMap(float value, float inputMin, float inputMax, float outputMin, float outputMax) {
 			float output = Mathf.Clamp(value, inputMin, inputMax);
 
@@ -42,7 +42,7 @@ namespace Centribo.Common {
 		}
 
 		/// <summary>
-		/// Returns the modulo of x when dividing by y
+		/// Returns the modulo of <paramref name="x"/> when dividing by <paramref name="y"/>
 		/// </summary>
 		public static int Mod(int x, int y) {
 			return (x % y + y) % y;
@@ -60,7 +60,7 @@ namespace Centribo.Common {
 		{-1, CompassDirection.Southeast}
 	};
 
-		public static CompassDirection StickInputToCompassDirection(Vector2 input) {
+		public static CompassDirection VectorToCompassDirection(Vector2 input) {
 			input = input.normalized;
 			float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 			float sectorSize = 360.0f / 8.0f;
@@ -83,7 +83,7 @@ namespace Centribo.Common {
 		{-1, CardinalCompassDirection.South}
 	};
 
-		public static CardinalCompassDirection StickInputToCardinalCompassDirection(Vector2 input) {
+		public static CardinalCompassDirection VectorToCardinalCompassDirection(Vector2 input) {
 			input = input.normalized;
 			float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 			float sectorSize = 360.0f / 4.0f;
@@ -115,6 +115,50 @@ namespace Centribo.Common {
 			dir *= range;
 
 			return dir;
+		}
+
+		/// <summary>
+		/// Returns a int repsenting a bitmask for adjacency:
+		/// Here is the full table:
+		/// - 0000 = 0 = blank
+		/// - 0001 = 1 = W
+		/// - 0010 = 2 = S
+		/// - 0011 = 3 = SW
+		/// - 0100 = 4 = E
+		/// - 0101 = 5 = EW
+		/// - 0110 = 6 = ES
+		/// - 0111 = 7 = ESW
+		/// - 1000 = 8 = N
+		/// - 1001 = 9 = NW
+		/// - 1010 = 10 = NS
+		/// - 1011 = 11 = NSW
+		/// - 1100 = 12 = NE
+		/// - 1101 = 13 = NEW
+		/// - 1110 = 14 = NES
+		/// - 1111 = 15 = NESW
+		/// For example if a object is adjacent to other objects to the north and east, we represent that as 1100.
+		/// </summary>
+		public static int ToBitMask(this CardinalCompassDirection direction) {
+			switch (direction) {
+				case CardinalCompassDirection.North: return 0b1000;
+				case CardinalCompassDirection.East: return 0b0100;
+				case CardinalCompassDirection.South: return 0b0010;
+				case CardinalCompassDirection.West: default: return 0b0001;
+			}
+		}
+
+		/// <summary>
+		/// Returns a bit mask representing multiple cardinal directions.
+		/// (Bitwise or of the result of <see cref="ToBitMask"/>)
+		/// </summary>
+		public static int ToBitMask(params CardinalCompassDirection[] directions) {
+			int result = 0;
+
+			foreach (CardinalCompassDirection direction in directions) {
+				result |= direction.ToBitMask();
+			}
+
+			return result;
 		}
 	}
 }

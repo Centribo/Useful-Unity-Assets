@@ -22,5 +22,9 @@ namespace Centribo.Common {
 		public static implicit operator Vector3IntSerializationSurrogate(Vector3Int original) {
 			return new Vector3IntSerializationSurrogate(original);
 		}
+
+		public override string ToString() {
+			return $"({X}, {Y}, {Z})";
+		}
 	}
 }
