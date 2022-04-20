@@ -39,7 +39,7 @@ namespace Centribo.Common.UI {
 			}
 
 			if (fillImage != null) {
-				float t = MathExtensions.LinearMap(Slider.value, Slider.minValue, Slider.maxValue, 0.0f, 1.0f);
+				float t = MathHelper.LinearMap(Slider.value, Slider.minValue, Slider.maxValue, 0.0f, 1.0f);
 				Color c = fillGradient.Evaluate(t);
 				fillImage.color = c;
 			}

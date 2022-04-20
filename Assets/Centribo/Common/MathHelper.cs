@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Centribo.Common.Extensions {
-	public static class MathExtensions {
+namespace Centribo.Common {
+	public static class MathHelper {
 		/// <summary>
 		/// Maps a given value in an input range to a output value in a given output range. The value will be clamped.
 		/// </summary>
