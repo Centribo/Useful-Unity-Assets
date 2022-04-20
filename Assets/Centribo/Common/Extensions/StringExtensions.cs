@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Centribo.Common.Extensions {
 	public static class StringExtensions {
 		/// <summary>

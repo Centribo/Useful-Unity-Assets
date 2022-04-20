@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Centribo.UI {
+namespace Centribo.Common.UI {
 	/// <summary>
 	/// Controller for a slider that has a label and progress text
 	/// </summary>
