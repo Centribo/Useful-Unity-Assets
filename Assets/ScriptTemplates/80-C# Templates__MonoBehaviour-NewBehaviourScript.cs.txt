@@ -20,6 +20,5 @@ using UnityEngine;
 			#NOTRIM#
 		}
 		
-		
 	}
 #ROOTNAMESPACEEND#

@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+#ROOTNAMESPACEBEGIN#
+	public class #SCRIPTNAME# : ScriptableWizard {
+	
+		[MenuItem("Wizards/#SCRIPTNAME#")]
+		public static void CreateWizard() {
+			DisplayWizard<#SCRIPTNAME#>("Window Title", "Create", "Other Button");
+		}
+		
+		void OnWizardUpdate() {
+			errorString = "Empty";
+		}
+		
+		void OnWizardCreate() {
+			#NOTRIM#
+		}
+		
+		void OnWizardOtherButton() {
+			#NOTRIM#
+		}
+	}
+#ROOTNAMESPACEEND#
