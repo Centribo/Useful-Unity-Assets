@@ -1,0 +1,288 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a61f197d92d1c24ba7d3d04ef8ed84f, type: 3}
+  m_Name: Player Spritesheet Slice Data
+  m_EditorClassIdentifier: 
+  SliceData:
+  - OriginalSprite: {fileID: 1502261803, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 9
+      y: 220
+      width: 63
+      height: 96
+    NormalizedPivot: {x: 0.35714287, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1736464688, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 84
+      y: 220
+      width: 71
+      height: 101
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -2093629010, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 162
+      y: 222
+      width: 78
+      height: 97
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1966931817, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 248
+      y: 220
+      width: 66
+      height: 84
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -83602619, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 321
+      y: 223
+      width: 79
+      height: 99
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1824770002, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 410
+      y: 224
+      width: 58
+      height: 99
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1605999427, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 492
+      y: 224
+      width: 58
+      height: 99
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1999616342, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 562
+      y: 220
+      width: 76
+      height: 97
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1389634300, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 643
+      y: 220
+      width: 75
+      height: 96
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1321375880, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 3
+      y: 110
+      width: 72
+      height: 97
+    NormalizedPivot: {x: 0.45833334, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 2086607223, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 93
+      y: 110
+      width: 55
+      height: 98
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1493466423, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 161
+      y: 110
+      width: 77
+      height: 96
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -982967443, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 249
+      y: 110
+      width: 52
+      height: 96
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -988864936, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 320
+      y: 110
+      width: 69
+      height: 100
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1496013227, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 400
+      y: 110
+      width: 78
+      height: 94
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 591458100, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 482
+      y: 110
+      width: 77
+      height: 98
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1956271176, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 560
+      y: 114
+      width: 79
+      height: 99
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -2066757699, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 642
+      y: 112
+      width: 76
+      height: 102
+    NormalizedPivot: {x: 0, y: 0}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -808884989, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 1
+      y: 0
+      width: 74
+      height: 96
+    NormalizedPivot: {x: 0.4864865, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 776590238, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 83
+      y: 0
+      width: 76
+      height: 92
+    NormalizedPivot: {x: 0, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -85873177, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 165
+      y: 0
+      width: 75
+      height: 108
+    NormalizedPivot: {x: 0, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: 1007309011, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e, type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 250
+      y: 0
+      width: 67
+      height: 95
+    NormalizedPivot: {x: 0, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1182953427, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 329
+      y: 0
+      width: 63
+      height: 96
+    NormalizedPivot: {x: 0, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1
+  - OriginalSprite: {fileID: -1695335719, guid: 0aa5e4b2c85eb6846bd406f2a483ad2e,
+      type: 3}
+    Rect:
+      serializedVersion: 2
+      x: 410
+      y: 0
+      width: 60
+      height: 96
+    NormalizedPivot: {x: 0, y: 0.5}
+    PixelsPerUnit: 100
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MeshType: 1

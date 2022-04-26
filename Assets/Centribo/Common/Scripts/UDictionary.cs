@@ -1,20 +1,7 @@
 using System;
-using System.IO;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.AI;
-
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditorInternal;
-#endif
-
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Centribo.Common {
 	[Serializable]
@@ -82,7 +69,6 @@ namespace Centribo.Common {
 		}
 
 		public bool TryGetValue(TKey key, out TValue value) => Dictionary.TryGetValue(key, out value);
-
 		public bool ContainsKey(TKey key) => Dictionary.ContainsKey(key);
 		public bool Contains(KeyValuePair<TKey, TValue> item) => ContainsKey(item.Key);
 

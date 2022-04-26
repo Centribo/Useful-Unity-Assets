@@ -8,14 +8,13 @@ using Centribo.Common.Extensions;
 
 namespace Centribo.Common.Editor.Wizards {
 	public class GenerateSpriteSliceDataWizard : ScriptableWizard {
-		enum OtherButtonMode { LoadSpritesFromTexture, PreviewSlicingOnTexture }
+		enum Mode { LoadSpritesFromTexture, PreviewSlicingOnTexture, UpdateExistingSlideData }
 
-		[SerializeField] private OtherButtonMode otherButtonMode = OtherButtonMode.LoadSpritesFromTexture;
+		[SerializeField] private Mode mode = Mode.LoadSpritesFromTexture;
 		[SerializeField] private Texture2D texture;
+		[SerializeField] private SpriteSliceDataContainer sliceDataToUpdate;
 		[SerializeField, ShowAssetPreview] private List<Sprite> sprites;
 		[SerializeField, ShowAssetPreview] private List<Sprite> slicedSpritesPreview;
-
-		protected bool test;
 
 		[MenuItem("Wizards/Generate Sprite Slice Data")]
 		public static void CreateWizard() {
@@ -24,6 +23,7 @@ namespace Centribo.Common.Editor.Wizards {
 
 		void OnWizardUpdate() {
 			UpdateOtherButton();
+			UpdateCreateButton();
 
 			if (sprites == null || sprites.Count == 0) {
 				errorString = "No sprites set";
@@ -44,36 +44,39 @@ namespace Centribo.Common.Editor.Wizards {
 		}
 
 		void OnWizardCreate() {
-			SpriteSliceDataContainer asset = ScriptableObject.CreateInstance<SpriteSliceDataContainer>();
-			asset.SliceData = sprites.GenerateSpliceData();
-			string fileName = texture != null ? texture.name : "Sprite Slice Data";
-			fileName = $"{fileName}.asset";
-			AssetDatabase.CreateAsset(asset, $"Assets/{fileName}");
-			AssetDatabase.SaveAssets();
-			EditorUtility.FocusProjectWindow();
-			Selection.activeObject = asset;
+			switch (mode) {
+				case Mode.LoadSpritesFromTexture:
+				case Mode.PreviewSlicingOnTexture:
+					SpriteSliceDataContainer asset = ScriptableObject.CreateInstance<SpriteSliceDataContainer>();
+					asset.SliceData = sprites.GenerateSliceData();
+					string fileName = texture != null ? texture.name : "Sprite Slice Data";
+					fileName = $"{fileName}.asset";
+					AssetDatabase.CreateAsset(asset, $"Assets/{fileName}");
+					AssetDatabase.SaveAssets();
+					EditorUtility.FocusProjectWindow();
+					Selection.activeObject = asset;
+					break;
 
+				case Mode.UpdateExistingSlideData:
+					sliceDataToUpdate.SliceData = sprites.GenerateSliceData();
+					AssetDatabase.SaveAssets();
+					EditorUtility.FocusProjectWindow();
+					Selection.activeObject = sliceDataToUpdate;
+					break;
+			}
 
-			// QuestionData asset = ScriptableObject.CreateInstance<QuestionData>();
-			// asset.Question = question;
-			// string fileName = asset.GenerateAssetName() + ".asset";
-			// AssetDatabase.CreateAsset(asset, QuestionPath + "/" + fileName);
-			// AssetDatabase.SaveAssets();
-			// EditorUtility.FocusProjectWindow();
-			// Selection.activeObject = asset;
 		}
 
 		void OnWizardOtherButton() {
-			switch (otherButtonMode) {
-				case OtherButtonMode.LoadSpritesFromTexture:
+			switch (mode) {
+				case Mode.LoadSpritesFromTexture:
 					string spriteSheetPath = AssetDatabase.GetAssetPath(texture);
 					Object[] objs = AssetDatabase.LoadAllAssetsAtPath(spriteSheetPath);
 					sprites = new List<Sprite>(objs.OfType<Sprite>());
 					OnWizardUpdate();
-					test = false;
 					break;
-				case OtherButtonMode.PreviewSlicingOnTexture:
-					List<SpriteSliceData> sliceData = sprites.GenerateSpliceData();
+				case Mode.PreviewSlicingOnTexture:
+					List<SpriteSliceData> sliceData = sprites.GenerateSliceData();
 					slicedSpritesPreview = new List<Sprite>();
 					foreach (SpriteSliceData slice in sliceData) {
 						slicedSpritesPreview.Add(texture.TrySlice(slice));
@@ -83,9 +86,22 @@ namespace Centribo.Common.Editor.Wizards {
 		}
 
 		void UpdateOtherButton() {
-			switch (otherButtonMode) {
-				case OtherButtonMode.LoadSpritesFromTexture: otherButtonName = "Try to load sprites from texture"; break;
-				case OtherButtonMode.PreviewSlicingOnTexture: otherButtonName = "Preview slicing on texture"; break;
+			switch (mode) {
+				case Mode.LoadSpritesFromTexture: otherButtonName = "Try to load sprites from texture"; break;
+				case Mode.PreviewSlicingOnTexture: otherButtonName = "Preview slicing on texture"; break;
+				case Mode.UpdateExistingSlideData: otherButtonName = ""; break;
+			}
+		}
+
+		void UpdateCreateButton() {
+			switch (mode) {
+				case Mode.LoadSpritesFromTexture:
+				case Mode.PreviewSlicingOnTexture:
+					createButtonName = "Create";
+					break;
+				case Mode.UpdateExistingSlideData:
+					createButtonName = "Update";
+					break;
 			}
 		}
 	}

@@ -6,7 +6,7 @@ namespace Centribo.Common {
 	[System.Serializable]
 	public class SpriteSliceData {
 		[ShowAssetPreview] public Sprite OriginalSprite;
-		public Rect Rect;
+		public Rect SpriteRect;
 		public Vector2 NormalizedPivot;
 		public float PixelsPerUnit;
 		public Vector4 Border;
@@ -16,10 +16,10 @@ namespace Centribo.Common {
 			OriginalSprite = sprite;
 			if (sprite == null) return;
 
-			Rect = sprite.rect;
-			Vector2 pivot = sprite.pivot;
-			Vector4 border = sprite.border;
-			NormalizedPivot = Rect.PointToNormalized(Rect, pivot);
+			SpriteRect = sprite.rect;
+			Vector2 localizedPivot = sprite.pivot + SpriteRect.position;
+			NormalizedPivot = Rect.PointToNormalized(SpriteRect, localizedPivot);
+			// Pivot = sprite.pivot;
 			PixelsPerUnit = sprite.pixelsPerUnit;
 			Border = sprite.border;
 			MeshType = sprite.packingMode == SpritePackingMode.Tight ? SpriteMeshType.Tight : SpriteMeshType.FullRect;
@@ -27,7 +27,7 @@ namespace Centribo.Common {
 
 		public SpriteSliceData(Sprite sprite, Rect rect, Vector2 normalizedPivot, float pixelsPerUnit) {
 			OriginalSprite = sprite;
-			Rect = rect;
+			SpriteRect = rect;
 			NormalizedPivot = normalizedPivot;
 			PixelsPerUnit = pixelsPerUnit;
 			Border = Vector4.zero;
@@ -47,7 +47,7 @@ namespace Centribo.Common {
 			if (texture == null) return null;
 
 			try {
-				Sprite sprite = Sprite.Create(texture, Rect, NormalizedPivot, PixelsPerUnit, 0, MeshType, Border);
+				Sprite sprite = Sprite.Create(texture, SpriteRect, NormalizedPivot, PixelsPerUnit, 0, MeshType, Border);
 				return sprite;
 			} catch (Exception e) {
 				Debug.LogException(e);
