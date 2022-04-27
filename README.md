@@ -7,7 +7,8 @@ Feel free to use them in any project you want (noncommercial or commercial). No 
 - Make sure you have all [prequisites](#prequisites) installed
 - Import/download the latest `.unitypackage` from [releases](https://github.com/Centribo/Useful-Unity-Assets/releases) into your editor
 - **Optional assets** 
-  - [.gitattributes](./.gitattributes) - Used to tell Git LFS how to handle certain common large gamedev assets.
+  - [ScriptTemplates](./Assets/ScriptTemplates/) - C# script templates for Unity. Copy this folder into the root of your project's `Assets` folder, then restart Unity editor. You can use these by going to `Assets > Create > C# Templates`.
+  - [.gitattributes](./.gitattributes) - Used to tell Git LFS how to handle certain common large gamedev assets
   - [.gitignore](./.gitignore) - A common git ignore file used for Unity projects
 
 ## Prequisites
