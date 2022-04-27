@@ -58,6 +58,7 @@ namespace Centribo.Common.Editor.Wizards {
 					break;
 
 				case Mode.UpdateExistingSlideData:
+					EditorUtility.SetDirty(sliceDataToUpdate);
 					sliceDataToUpdate.SliceData = sprites.GenerateSliceData();
 					AssetDatabase.SaveAssets();
 					EditorUtility.FocusProjectWindow();
