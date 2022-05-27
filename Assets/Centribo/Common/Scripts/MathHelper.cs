@@ -1,23 +1,40 @@
-﻿using UnityEngine;
-
-namespace Centribo.Common {
+﻿namespace Centribo.Common {
 	public static class MathHelper {
 		/// <summary>
-		/// Maps a given value in an input range to a output value in a given output range. The value will be clamped.
+		/// Maps a given <paramref name="inValue"/> from [<paramref name="inStart"/>, <paramref name="inEnd"/>] to [<paramref name="outStart"/>, <paramref name="outEnd"/>].
+		/// There is an optional easing function parameter. See: <see cref="Centribo.Common.EasingFunction"/>.
 		/// </summary>
-		/// <param name="value">The value in the input range [<paramref name="inputMin"/>, <paramref name="inputMax"/>]. This value will be clamped into the range.</param>
-		/// <param name="inputMin">The minimum value of the input range</param>
-		/// <param name="inputMax">The maximum value of the input range</param>
-		/// <param name="outputMin">The minimum value of the output range</param>
-		/// <param name="outputMax">the maximum value of the output range</param>
-		/// <returns>The linearly mapped value in the range [<paramref name="outputMin"/>, <paramref name="outputMax"/>]</returns>
-		public static float LinearMap(float value, float inputMin, float inputMax, float outputMin, float outputMax) {
-			float output = Mathf.Clamp(value, inputMin, inputMax);
+		/// <param name="inValue">The input value</param>
+		/// <param name="inStart">Inclusive input minimum</param>
+		/// <param name="inEnd">Inclusive input maximum</param>
+		/// <param name="outStart">Inclusive output minimum</param>
+		/// <param name="outEnd">Inclusive output maximum</param>
+		/// <param name="easingFunction">What easing function to use; Linear is used by default. See: <see cref="Centribo.Common.EasingFunction"/>.</param>
+		public static float RangeMap(float inValue, float inStart, float inEnd, float outStart, float outEnd, EasingFunction.Ease easingFunction = EasingFunction.Ease.Linear) {
+			EasingFunction.EasingDelegate easeDelegate = EasingFunction.GetEasingFunction(easingFunction);
+			return RangeMap(inValue, inStart, inEnd, outStart, outEnd, easeDelegate);
+		}
 
-			float inputRange = inputMax - inputMin;
-			float outputRange = outputMax - outputMin;
+		/// <summary>
+		/// Maps a given <paramref name="inValue"/> from [<paramref name="inStart"/>, <paramref name="inEnd"/>] to [<paramref name="outStart"/>, <paramref name="outEnd"/>].
+		/// There is an optional easing function parameter. See: <see cref="Centribo.Common.EasingFunction"/>.
+		/// </summary>
+		/// <param name="inValue">The input value</param>
+		/// <param name="inStart">Inclusive input minimum</param>
+		/// <param name="inEnd">Inclusive input maximum</param>
+		/// <param name="outStart">Inclusive output minimum</param>
+		/// <param name="outEnd">Inclusive output maximum</param>
+		/// <param name="easingFunction">What easing function delegate to use. See: <see cref="Centribo.Common.EasingFunction"/>.</param>
+		public static float RangeMap(float inValue, float inStart, float inEnd, float outStart, float outEnd, EasingFunction.EasingDelegate easingFunction) {
+			float output = inValue - inStart;
+			output = output / (inEnd - inStart); // [0,1]
 
-			output = ((output - inputMin) * (outputRange / inputRange)) + outputMin;
+			if (easingFunction != null) {
+				output = easingFunction(0, 1, output);
+			}
+
+			output = output * (outEnd - outStart); // [0, outRange]
+			output = output + outStart; // [outStart, outEnd]
 			return output;
 		}
 
