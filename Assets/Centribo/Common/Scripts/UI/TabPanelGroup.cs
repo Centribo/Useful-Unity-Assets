@@ -6,38 +6,38 @@ using UnityEngine.UI;
 namespace Centribo.Common.UI {
 	[RequireComponent(typeof(ToggleGroup))]
 	public class TabPanelGroup : Panel {
-		[SerializeField] private List<Panel> panels;
-		[SerializeField] private List<Toggle> toggles;
-		[SerializeField] private bool loopTabMovement = true;
+		[SerializeField] protected List<Panel> Panels;
+		[SerializeField] protected List<Toggle> Toggles;
+		[SerializeField] public bool LoopTabMovement = true;
 
-		private ToggleGroup toggleGroup;
-		private int currentTabIndex;
-		private Dictionary<Toggle, Panel> panelsByToggle;
+		protected ToggleGroup ToggleGroup;
+		protected int CurrentTabIndex;
+		protected Dictionary<Toggle, Panel> PanelsByToggle;
 
 		public override void Open() {
-			toggleGroup ??= GetComponent<ToggleGroup>();
-			currentTabIndex = 0;
+			ToggleGroup = ToggleGroup ? ToggleGroup : GetComponent<ToggleGroup>();
+			CurrentTabIndex = 0;
 
-			if (panels.Count != toggles.Count) {
-				Debug.LogError($"Mismatch in number of panels ({panels.Count}) and number of toggles ({toggles})", this);
+			if (Panels.Count != Toggles.Count) {
+				Debug.LogError($"Mismatch in number of panels ({Panels.Count}) and number of toggles ({Toggles})", this);
 			}
 
-			panelsByToggle = new Dictionary<Toggle, Panel>();
-			for (int i = 0; i < Mathf.Min(panels.Count, toggles.Count); i++) {
-				panelsByToggle.Add(toggles[i], panels[i]);
+			PanelsByToggle = new Dictionary<Toggle, Panel>();
+			for (int i = 0; i < Mathf.Min(Panels.Count, Toggles.Count); i++) {
+				PanelsByToggle.Add(Toggles[i], Panels[i]);
 			}
 
-			foreach (Toggle toggle in toggles) {
+			foreach (Toggle toggle in Toggles) {
 				// toggleGroup.RegisterToggle(toggle);
-				toggle.group = toggleGroup;
+				toggle.group = ToggleGroup;
 				toggle.onValueChanged.AddListener(delegate {
 					OnToggleValueChanged(toggle);
 				});
 			}
 
-			if (toggles.Count > 0) {
-				for (int i = 0; i < toggles.Count; i++) {
-					toggles[i].isOn = i == currentTabIndex;
+			if (Toggles.Count > 0) {
+				for (int i = 0; i < Toggles.Count; i++) {
+					Toggles[i].isOn = i == CurrentTabIndex;
 				}
 			}
 
@@ -46,7 +46,7 @@ namespace Centribo.Common.UI {
 		}
 
 		public override void Close() {
-			foreach (Toggle toggle in toggles) {
+			foreach (Toggle toggle in Toggles) {
 				toggle.onValueChanged.RemoveAllListeners();
 			}
 
@@ -55,49 +55,52 @@ namespace Centribo.Common.UI {
 
 
 		public void ForceUpdateShownPanel() {
-			Debug.Log(currentTabIndex);
-			for (int i = 0; i < panels.Count; i++) {
-				if (i == currentTabIndex) {
-					panels[i]?.Open();
+			Debug.Log(CurrentTabIndex);
+			for (int i = 0; i < Panels.Count; i++) {
+				if (Panels[i] == null) continue;
+
+				if (i == CurrentTabIndex) {
+					Panels[i].Open();
 				} else {
-					panels[i]?.Close();
+					Panels[i].Close();
 				}
 			}
 		}
 
 		public void IncrementActiveTab() {
-			currentTabIndex++;
+			CurrentTabIndex++;
 			WrapCurrentTabIndex();
-			toggles[currentTabIndex].isOn = true;
+			Toggles[CurrentTabIndex].isOn = true;
 		}
 
 		public void DecrementActiveTab() {
-			currentTabIndex--;
+			CurrentTabIndex--;
 			WrapCurrentTabIndex();
-			toggles[currentTabIndex].isOn = true;
+			Toggles[CurrentTabIndex].isOn = true;
 		}
 
 		void OnToggleValueChanged(Toggle toggle) {
-			if (panelsByToggle.ContainsKey(toggle)) {
-				Panel panel = panelsByToggle[toggle];
-
-				if (toggle.isOn) {
-					panel?.Open();
-				} else {
-					panel?.Close();
+			if (PanelsByToggle.ContainsKey(toggle)) {
+				Panel panel = PanelsByToggle[toggle];
+				if (panel != null) {
+					if (toggle.isOn) {
+						panel.Open();
+					} else {
+						panel.Close();
+					}
 				}
 			}
 
 			if (toggle.isOn) {
-				currentTabIndex = toggles.IndexOf(toggle);
+				CurrentTabIndex = Toggles.IndexOf(toggle);
 			}
 		}
 
 		void WrapCurrentTabIndex() {
-			if (loopTabMovement) {
-				currentTabIndex = MathHelper.Mod(currentTabIndex, toggles.Count);
+			if (LoopTabMovement) {
+				CurrentTabIndex = MathHelper.Mod(CurrentTabIndex, Toggles.Count);
 			} else {
-				currentTabIndex = Mathf.Clamp(currentTabIndex, 0, toggles.Count - 1);
+				CurrentTabIndex = Mathf.Clamp(CurrentTabIndex, 0, Toggles.Count - 1);
 			}
 		}
 	}
