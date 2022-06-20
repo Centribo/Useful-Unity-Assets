@@ -39,9 +39,9 @@ namespace Centribo.Common.Extensions {
 		}
 
 		/// <summary>
-		/// 
+		/// Returns a list of adjacent positions that are cardinally or ordinally adjacent in a 2D context.
 		/// </summary>
-		public static List<Vector3Int> GetNeighbours(this Vector3Int origin) {
+		public static List<Vector3Int> GetCompassNeighbours(this Vector3Int origin) {
 			List<Vector3Int> neighbours = new List<Vector3Int>(){
 				origin + Vector3Int.up, // North
 				origin + Vector3Int.up + Vector3Int.right, // Northeast
@@ -51,6 +51,34 @@ namespace Centribo.Common.Extensions {
 				origin + Vector3Int.down + Vector3Int.left, // Southwest
 				origin + Vector3Int.left, // West
 				origin + Vector3Int.up + Vector3Int.left // Northwest
+			};
+
+			return neighbours;
+		}
+
+		/// <summary>
+		/// Returns a list of adjacent positions that are ordinally adjacent in a 2D context.
+		/// </summary>
+		public static List<Vector3Int> GetOrdinalNeighbours(this Vector3Int origin) {
+			List<Vector3Int> neighbours = new List<Vector3Int>(){
+				origin + Vector3Int.up + Vector3Int.right, // Northeast
+				origin + Vector3Int.down + Vector3Int.right, // Southeast
+				origin + Vector3Int.down + Vector3Int.left, // Southwest
+				origin + Vector3Int.up + Vector3Int.left // Northwest
+			};
+
+			return neighbours;
+		}
+
+		/// <summary>
+		/// Returns a list of adjacent positions that are cardinally adjacent in a 2D context.
+		/// </summary>
+		public static List<Vector3Int> GetCardinalNeighbours(this Vector3Int origin) {
+			List<Vector3Int> neighbours = new List<Vector3Int>(){
+				origin + Vector3Int.up, // North
+				origin + Vector3Int.right, // East
+				origin + Vector3Int.down, // South
+				origin + Vector3Int.left, // West
 			};
 
 			return neighbours;
