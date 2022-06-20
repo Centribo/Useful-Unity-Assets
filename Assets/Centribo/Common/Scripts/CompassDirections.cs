@@ -13,11 +13,4 @@ namespace Centribo.Common {
 		West = 6,
 		Northwest = 7
 	}
-
-	public enum CardinalCompassDirection : int {
-		North = 0,
-		East = 2,
-		South = 4,
-		West = 6
-	}
 }

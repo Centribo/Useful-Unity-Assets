@@ -37,5 +37,23 @@ namespace Centribo.Common.Extensions {
 				}
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static List<Vector3Int> GetNeighbours(this Vector3Int origin) {
+			List<Vector3Int> neighbours = new List<Vector3Int>(){
+				origin + Vector3Int.up, // North
+				origin + Vector3Int.up + Vector3Int.right, // Northeast
+				origin + Vector3Int.right, // East
+				origin + Vector3Int.down + Vector3Int.right, // Southeast
+				origin + Vector3Int.down, // South
+				origin + Vector3Int.down + Vector3Int.left, // Southwest
+				origin + Vector3Int.left, // West
+				origin + Vector3Int.up + Vector3Int.left // Northwest
+			};
+
+			return neighbours;
+		}
 	}
 }

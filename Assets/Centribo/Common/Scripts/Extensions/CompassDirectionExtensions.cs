@@ -30,29 +30,6 @@ namespace Centribo.Common.Extensions {
 			}
 		}
 
-		static Dictionary<int, CardinalCompassDirection> sectorToCardinalCompassDirectionLookup = new Dictionary<int, CardinalCompassDirection> {
-			{0, CardinalCompassDirection.East},
-			{1, CardinalCompassDirection.North},
-			{2, CardinalCompassDirection.West},
-			{-2, CardinalCompassDirection.West},
-			{-1, CardinalCompassDirection.South}
-		};
-
-		public static CardinalCompassDirection VectorToCardinalCompassDirection(Vector2 input) {
-			input = input.normalized;
-			float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-			float sectorSize = 360.0f / 4.0f;
-			float halfSectorSize = sectorSize / 2.0f;
-			float convertedAngle = inputAngle + halfSectorSize;
-			int sector = Mathf.FloorToInt(convertedAngle / sectorSize);
-
-			if (sectorToCardinalCompassDirectionLookup.ContainsKey(sector)) {
-				return sectorToCardinalCompassDirectionLookup[sector];
-			} else {
-				return CardinalCompassDirection.East;
-			}
-		}
-
 		public static Vector2 ToVector(this CompassDirection direction, float range = 1.0f) {
 			Vector2 dir = Vector2.zero;
 			switch (direction) {
@@ -73,43 +50,31 @@ namespace Centribo.Common.Extensions {
 		}
 
 		/// <summary>
-		/// Returns a int repsenting a bitmask for adjacency:
-		/// Here is the full table:
-		/// - 0000 = 0 = blank
-		/// - 0001 = 1 = W
-		/// - 0010 = 2 = S
-		/// - 0011 = 3 = SW
-		/// - 0100 = 4 = E
-		/// - 0101 = 5 = EW
-		/// - 0110 = 6 = ES
-		/// - 0111 = 7 = ESW
-		/// - 1000 = 8 = N
-		/// - 1001 = 9 = NW
-		/// - 1010 = 10 = NS
-		/// - 1011 = 11 = NSW
-		/// - 1100 = 12 = NE
-		/// - 1101 = 13 = NEW
-		/// - 1110 = 14 = NES
-		/// - 1111 = 15 = NESW
-		/// For example if a object is adjacent to other objects to the north and east, we represent that as 1100.
+		/// Returns a byte representing a bitmask for adjacency.
 		/// </summary>
-		public static int ToBitMask(this CardinalCompassDirection direction) {
+		public static int ToBitMask(this CompassDirection direction) {
 			switch (direction) {
-				case CardinalCompassDirection.North: return 0b1000;
-				case CardinalCompassDirection.East: return 0b0100;
-				case CardinalCompassDirection.South: return 0b0010;
-				case CardinalCompassDirection.West: default: return 0b0001;
+				case CompassDirection.North: return 0b00000001;
+				case CompassDirection.Northeast: return 0b00000010;
+				case CompassDirection.East: return 0b00000100;
+				case CompassDirection.Southeast: return 0b00001000;
+				case CompassDirection.South: return 0b00010000;
+				case CompassDirection.Southwest: return 0b00100000;
+				case CompassDirection.West: return 0b01000000;
+				case CompassDirection.Northwest: return 0b10000000;
 			}
+
+			return 0b00000000;
 		}
 
 		/// <summary>
 		/// Returns a bit mask representing multiple cardinal directions.
 		/// (Bitwise or of the result of <see cref="ToBitMask"/>)
 		/// </summary>
-		public static int ToBitMask(params CardinalCompassDirection[] directions) {
+		public static int ToBitMask(params CompassDirection[] directions) {
 			int result = 0;
 
-			foreach (CardinalCompassDirection direction in directions) {
+			foreach (CompassDirection direction in directions) {
 				result |= direction.ToBitMask();
 			}
 
