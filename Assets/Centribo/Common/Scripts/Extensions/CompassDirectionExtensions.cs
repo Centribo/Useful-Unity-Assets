@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Centribo.Common.Extensions {
 	public static class CompassDirectionExtensions {
+		public const int OrdinalBitMask = (int) CompassDirection.Northeast | (int) CompassDirection.Southeast | (int) CompassDirection.Southwest | (int) CompassDirection.Northwest;
+		public const int CardinalBitMask = (int) CompassDirection.North | (int) CompassDirection.East | (int) CompassDirection.South | (int) CompassDirection.West;
+
 		static Dictionary<int, CompassDirection> sectorToCompassDirectionLookup = new Dictionary<int, CompassDirection> {
 			{0, CompassDirection.East},
 			{1, CompassDirection.Northeast},
@@ -50,24 +53,6 @@ namespace Centribo.Common.Extensions {
 		}
 
 		/// <summary>
-		/// Returns a byte representing a bitmask for adjacency.
-		/// </summary>
-		public static int ToBitMask(this CompassDirection direction) {
-			switch (direction) {
-				case CompassDirection.North: return 0b00000001;
-				case CompassDirection.Northeast: return 0b00000010;
-				case CompassDirection.East: return 0b00000100;
-				case CompassDirection.Southeast: return 0b00001000;
-				case CompassDirection.South: return 0b00010000;
-				case CompassDirection.Southwest: return 0b00100000;
-				case CompassDirection.West: return 0b01000000;
-				case CompassDirection.Northwest: return 0b10000000;
-			}
-
-			return 0b00000000;
-		}
-
-		/// <summary>
 		/// Returns a bit mask representing multiple cardinal directions.
 		/// (Bitwise or of the result of <see cref="ToBitMask"/>)
 		/// </summary>
@@ -75,10 +60,11 @@ namespace Centribo.Common.Extensions {
 			int result = 0;
 
 			foreach (CompassDirection direction in directions) {
-				result |= direction.ToBitMask();
+				result |= (int) direction;
 			}
 
 			return result;
 		}
+
 	}
 }
