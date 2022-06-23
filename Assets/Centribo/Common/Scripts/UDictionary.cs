@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Sample usage:
+// [System.Serializable] public class IntStringDictionary : UDictionary<int, string> { }
+// [SerializeField] private IntStringDictionary idToName;
+
+// By reddit user: Moe_Baker
+// https://www.reddit.com/r/Unity3D/comments/m5xesp/made_a_dictionary_that_you_can_edit_in_the/
+
 namespace Centribo.Common {
 	[Serializable]
 	public class UDictionary {
