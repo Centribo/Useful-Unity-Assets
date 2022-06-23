@@ -80,7 +80,7 @@ namespace Centribo.Common {
 		public void FindAllAssetsInProject() {
 			HashSet<V> objectSet = new HashSet<V>();
 
-			string[] guids = AssetDatabase.FindAssets("");
+			string[] guids = AssetDatabase.FindAssets($"t:{typeof(V).ToString()}");
 			foreach (string guid in guids) {
 				string prefabPath = AssetDatabase.GUIDToAssetPath(guid);
 				V asset = AssetDatabase.LoadAssetAtPath<V>(prefabPath);
