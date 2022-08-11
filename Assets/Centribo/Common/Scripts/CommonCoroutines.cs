@@ -7,10 +7,10 @@ using UnityEngine.UI;
 namespace Centribo.Common {
 	public static class CommonCoroutines {
 		/// <summary>
-		/// Fades a given sprite renderer from a given start color to a given end color, over a period of time (in seconds)
+		/// Fades a given SpriteRenderer from a given start color to a given end color, over a period of time (in seconds)
 		/// </summary>
 		static public IEnumerator FadeSpriteRenderer(this SpriteRenderer spriteRenderer, Color startColor, Color endColor, float fadeTime) {
-			if (spriteRenderer == null) { yield break; }
+			if (spriteRenderer == null) yield break;
 			spriteRenderer.color = startColor;
 
 			for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeTime) {
@@ -20,6 +20,29 @@ namespace Centribo.Common {
 			}
 
 			spriteRenderer.color = endColor;
+		}
+
+		/// <summary>
+		/// Fades a collection/set of SpriteRenderers from a given start color to a given end color, over a period of time (in seconds)
+		/// </summary>
+		static public IEnumerator FadeSpriteRenderers(this ICollection<SpriteRenderer> spriteRenderers, Color startColor, Color endColor, float fadeTime) {
+			if (spriteRenderers == null) yield break;
+			SetSpriteRenderersColor(spriteRenderers, startColor);
+
+			for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeTime) {
+				Color c = Color.Lerp(startColor, endColor, t);
+				SetSpriteRenderersColor(spriteRenderers, c);
+				yield return new WaitForEndOfFrame();
+			}
+
+			SetSpriteRenderersColor(spriteRenderers, endColor);
+
+			void SetSpriteRenderersColor(ICollection<SpriteRenderer> spriteRenderers, Color c) {
+				foreach (SpriteRenderer sprite in spriteRenderers) {
+					if (sprite == null) continue;
+					sprite.color = c;
+				}
+			}
 		}
 
 		/// <summary>
