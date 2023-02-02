@@ -35,6 +35,24 @@ namespace Centribo.Common.Extensions {
 			}
 			UnityEditor.Handles.EndGUI();
 		}
+
+		/// <summary>
+		/// Draws a given rect in world space
+		/// </summary>
+		/// <param name="rectColor">Sets <see cref="Gizmos.color"> for drawing the rect</param>
+		public static void DrawRect(Rect rect, Color? rectColor = null) {
+			if(rectColor != null) Gizmos.color = rectColor.Value;
+
+			Vector2 topLeft = new Vector2(rect.xMin, rect.yMin);
+			Vector2 topRight = new Vector2(rect.xMax, rect.yMin);
+			Vector2 bottomLeft = new Vector2(rect.xMin, rect.yMax);
+			Vector2 bottomRight = new Vector2(rect.xMax, rect.yMax);
+
+			Gizmos.DrawLine(topLeft, topRight);
+			Gizmos.DrawLine(topRight, bottomRight);
+			Gizmos.DrawLine(bottomRight, bottomLeft);
+			Gizmos.DrawLine(bottomLeft, topLeft);
+		}
 	}
 }
 
